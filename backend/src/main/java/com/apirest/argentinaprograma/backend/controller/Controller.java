@@ -4,12 +4,15 @@ import com.apirest.argentinaprograma.backend.dto.EducacionDto;
 import com.apirest.argentinaprograma.backend.dto.ExperienciaDto;
 import com.apirest.argentinaprograma.backend.dto.HabilidadDto;
 import com.apirest.argentinaprograma.backend.dto.Mensaje;
+import com.apirest.argentinaprograma.backend.dto.ProyectoDto;
 import com.apirest.argentinaprograma.backend.model.Educacion;
 import com.apirest.argentinaprograma.backend.model.Experiencia;
 import com.apirest.argentinaprograma.backend.model.Habilidad;
+import com.apirest.argentinaprograma.backend.model.Proyecto;
 import com.apirest.argentinaprograma.backend.service.EducacionService;
 import com.apirest.argentinaprograma.backend.service.ExperienciaService;
 import com.apirest.argentinaprograma.backend.service.HabilidadService;
+import com.apirest.argentinaprograma.backend.service.ProyectoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,6 +42,8 @@ public class Controller {
     private ExperienciaService expServ;
     @Autowired
     private HabilidadService habServ;
+    @Autowired
+    private ProyectoService proyServ;
 
     @GetMapping("/traerlistahabilidades")
     @ResponseBody
@@ -200,5 +205,58 @@ public class Controller {
         edu.setFechaFin(eduDto.getFechaFin());
 
         eduServ.agregarEducacion(edu);
+    }
+    
+    @GetMapping("/traerlistaproyecto")
+    @ResponseBody
+    public List<Proyecto> traerListaProyecto() {
+        return proyServ.verProyecto();
+    }
+
+    @GetMapping("/traerunproyecto/{id}")
+    @ResponseBody
+    public ResponseEntity<Proyecto> unaProyecto(@PathVariable("id") Long id) {
+        Proyecto proy = proyServ.obtenerUno(id);
+        return new ResponseEntity(proy, HttpStatus.OK);
+    }
+
+    @PostMapping("/nuevoproyecto")
+    public ResponseEntity<?> nuevoProyecto(@RequestBody ProyectoDto proyDto) {
+        if (StringUtils.isBlank(proyDto.getNombre())) {
+            return new ResponseEntity(new Mensaje("El nombre delproyecto es obligatorio"), HttpStatus.BAD_REQUEST);
+        }
+        //hacer todas las validaciones
+        Proyecto proy = new Proyecto();
+        proy.setNombre(proyDto.getNombre());
+        proy.setSubtitulo(proyDto.getSubtitulo());
+        proy.setDescripcion(proyDto.getDescripcion());
+        proy.setImagenes(proyDto.getImagenes());
+        proy.setStack(proyDto.getStack());
+        proy.setCreacion(proyDto.getCreacion());
+        proy.setCreacionFin(proyDto.getCreacionFin());
+        proy.setLink(proyDto.getLink());
+
+        proyServ.agregarProyecto(proy);
+        return new ResponseEntity(new Mensaje("Elemento Proyecto Creado"), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/eliminarproyecto/{id}")
+    public void eliminarProyecto(@PathVariable Long id) {
+        proyServ.eliminarProyecto(id);
+    }
+
+    @PutMapping("/editarproyecto/{id}")
+    public void editarProyecto(@RequestBody ProyectoDto proyDto, @PathVariable("id") Long id) {
+        Proyecto proy = proyServ.obtenerUno(id);
+        proy.setNombre(proyDto.getNombre());
+        proy.setSubtitulo(proyDto.getSubtitulo());
+        proy.setDescripcion(proyDto.getDescripcion());
+        proy.setImagenes(proyDto.getImagenes());
+        proy.setStack(proyDto.getStack());
+        proy.setCreacion(proyDto.getCreacion());
+        proy.setCreacionFin(proyDto.getCreacionFin());
+        proy.setLink(proyDto.getLink());
+
+        proyServ.agregarProyecto(proy);
     }
 }
