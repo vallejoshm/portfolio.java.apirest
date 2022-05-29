@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,6 +59,7 @@ public class Controller {
         return new ResponseEntity(hab, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/nuevahabilidad")
     public ResponseEntity<?> nuevaHabilidad(@RequestBody HabilidadDto habDto) {
         if (StringUtils.isBlank(habDto.getTipo())) {
@@ -73,11 +75,13 @@ public class Controller {
         return new ResponseEntity(new Mensaje("Elemento Habilidad Creado"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/eliminarhabilidad/{id}")
     public void eliminarHabilidad(@PathVariable Long id) {
         habServ.eliminarHabilidad(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/editarhabilidad/{id}")
     public void editarHabilidad(@RequestBody HabilidadDto habDto, @PathVariable("id") Long id) {
         Habilidad hab = habServ.obtenerUna(id);
@@ -102,6 +106,7 @@ public class Controller {
         return new ResponseEntity(exp, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/nuevaexperiencia")
     public ResponseEntity<?> nuevaExperiencia(@RequestBody ExperienciaDto expDto) {
         if (StringUtils.isBlank(expDto.getCargo())) {
@@ -122,11 +127,13 @@ public class Controller {
         return new ResponseEntity(new Mensaje("Elemento Experiencia Creado"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/eliminarexperiencia/{id}")
     public void eliminarExperiencia(@PathVariable Long id) {
         expServ.eliminarExperiencia(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/editarexperiencia/{id}")
     public void editarExperiencia(@RequestBody ExperienciaDto expDto, @PathVariable("id") Long id) {
         Experiencia exp = expServ.obtenerUna(id);
@@ -159,6 +166,7 @@ public class Controller {
         return new ResponseEntity(edu, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/nuevaeducacion")
     public ResponseEntity<?> nuevaEducacion(@RequestBody EducacionDto eduDto) {
 
@@ -185,11 +193,13 @@ public class Controller {
         return new ResponseEntity(new Mensaje("Elemento Educacion Creado"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/eliminareducacion/{id}")
     public void eliminarEducacion(@PathVariable Long id) {
         eduServ.eliminarEducacion(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/editareducacion/{id}")
     public void editarEducacion(@RequestBody EducacionDto eduDto, @PathVariable("id") Long id) {
         Educacion edu = eduServ.obtenerUna(id);
@@ -240,11 +250,13 @@ public class Controller {
         return new ResponseEntity(new Mensaje("Elemento Proyecto Creado"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/eliminarproyecto/{id}")
     public void eliminarProyecto(@PathVariable Long id) {
         proyServ.eliminarProyecto(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/editarproyecto/{id}")
     public void editarProyecto(@RequestBody ProyectoDto proyDto, @PathVariable("id") Long id) {
         Proyecto proy = proyServ.obtenerUno(id);
