@@ -22,7 +22,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})@Transactional
+@CrossOrigin(origins = "*")
+@Transactional
 @RestController
 @RequestMapping("/")
 public class Controller {
