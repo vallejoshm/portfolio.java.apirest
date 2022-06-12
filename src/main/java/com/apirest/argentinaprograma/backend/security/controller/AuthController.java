@@ -26,7 +26,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "https://portfolio-web-hmv.herokuapp.com")
+@CrossOrigin(origins = "https://portfolio-web-hv.web.app")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -46,7 +46,7 @@ public class AuthController {
     @Autowired
     JwtProvider jwtProvider;
 
-    @CrossOrigin(origins = "https://portfolio-web-hmv.herokuapp.com")
+    @CrossOrigin(origins = "https://portfolio-web-hv.web.app")
     @PostMapping("/nuevo")
     public ResponseEntity<?>nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult){
         if(bindingResult.hasErrors())
@@ -67,7 +67,7 @@ public class AuthController {
         return new ResponseEntity(new Mensaje("usuario guardado"), HttpStatus.CREATED);
     }
 
-    @CrossOrigin(origins = "https://portfolio-web-hmv.herokuapp.com")
+    @CrossOrigin(origins = "https://portfolio-web-hv.web.app")
     @PostMapping("/login")
     public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
         if(bindingResult.hasErrors())
@@ -80,7 +80,7 @@ public class AuthController {
         return new ResponseEntity(jwtDto, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "https://portfolio-web-hmv.herokuapp.com")
+    @CrossOrigin(origins = "https://portfolio-web-hv.web.app")
     @PostMapping("/refresh")
     public ResponseEntity<JwtDto> refresh(@RequestBody JwtDto jwtDto) throws ParseException {
         String token = jwtProvider.refreshToken(jwtDto);

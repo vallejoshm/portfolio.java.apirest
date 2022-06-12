@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "https://portfolio-web-hmv.herokuapp.com")
+@CrossOrigin(origins = "https://portfolio-web-hv.web.app")
 @Transactional
 @RestController
 @RequestMapping("/")
