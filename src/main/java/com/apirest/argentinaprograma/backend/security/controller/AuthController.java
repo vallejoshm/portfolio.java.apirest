@@ -26,7 +26,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "https://portfolio-web-hv.firebaseapp.com/")
+//@CrossOrigin(origins = "https://portfolio-web-hv.firebaseapp.com/")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {

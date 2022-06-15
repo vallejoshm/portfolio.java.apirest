@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "https://portfolio-web-hv.firebaseapp.com/")
+//@CrossOrigin(origins = "https://portfolio-web-hv.firebaseapp.com/")
 @Transactional
 @RestController
 @RequestMapping("/")
