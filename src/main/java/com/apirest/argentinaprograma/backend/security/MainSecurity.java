@@ -72,7 +72,7 @@ public class MainSecurity {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedMethods("*");
+                        .allowedMethods("https://portfolio-web-hv.firebaseapp.com/");
             }
         };
     }
