@@ -66,16 +66,16 @@ public class MainSecurity {
         return http.build();
     }
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedMethods("https://portfolio-web-hv.firebaseapp.com/");
-            }
-        };
-    }
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/**")
+//                        .allowedMethods("https://portfolio-web-hv.firebaseapp.com/");
+//            }
+//        };
+//    }
   /*  @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
